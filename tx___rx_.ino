@@ -74,8 +74,8 @@ void setup() {
 void loop() {
   if (rf95.available()) {
     // Should be a message for us now   
-    uint8_t buf[RH_RF95_MAX_MESSAGE_LEN];
-    uint8_t len = sizeof(buf);
+    char buf[RH_RF95_MAX_MESSAGE_LEN];
+    char len = sizeof(buf);
     
     if (! rf95.recv(buf, &len)) {
       Serial.println("Receive failed");
@@ -85,16 +85,13 @@ void loop() {
     RH_RF95::printBuffer("Received: ", buf, len);
     Serial.print("Got: "); Serial.println((char*)buf);
     Serial.print("RSSI: "); Serial.println(rf95.lastRssi(), DEC);
-
-    if ((char*)buf != 0) {
+    Serial.println((char*)buf == "Button #A");
+    
+    if (!strcmp(&buf[8], "A")) {
+      Serial.println("light up!");
       digitalWrite(RLED, HIGH);
       delay(1000);
       digitalWrite(RLED, LOW);
-
-      char arr[ ] = "This is a test";
-      string str(arr);
-      str = "This is another string";
-      str = arr;
     }
    /* oled.clearDisplay();
     oled.setCursor(0,0);
