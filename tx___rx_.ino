@@ -18,7 +18,7 @@
 #define BUTTON_A 9
 #define BUTTON_B 6
 #define BUTTON_C 5
-#define RLED     11
+#define RLED     13
 
 // Define frequency
 #define RF95_FREQ 915.0
@@ -37,6 +37,8 @@ void setup() {
   pinMode(BUTTON_C, INPUT_PULLUP);
   pinMode(RLED, OUTPUT);
   pinMode(RFM95_RST, OUTPUT);
+
+  digitalWrite(RLED, LOW);
   
   digitalWrite(RFM95_RST, HIGH);
   Serial.println("Booting");
